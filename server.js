@@ -3,9 +3,9 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
 
-const Shop = require('./models/shop');
-const Status = require('./models/status');
-const Item = require('./models/item');
+const items = require('./controllers/items');
+const shops = require('./controllers/shops');
+const status = require('./controllers/status');
 
 const app = express();
 app.use(cors());
@@ -13,7 +13,12 @@ app.use(bodyParser.json());
 
 mongoose.connect("mongodb://louise:shoppinglist000@ds119049.mlab.com:19049/shoppinglist");
 
-
+app.get('/items', (req, res) => { items.getItems(req, res) })
+app.get('/shops', (req, res) => { shops.getShops(req, res) })
+app.post('/shops/new', (req, res) => { shops.newShop(req, res) })
+app.put('/shops/:id/edit', (req, res) => { shops.updateShop(req, res) })
+app.delete('/shops/delete', (req, res) => { shops.deleteShop(req, res) })
+app.get('/status', (req, res) => { status.getStatus(req, res) })
 
 
 app.listen(3050, () => {
