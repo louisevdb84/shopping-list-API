@@ -7,6 +7,7 @@ var itemSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: "Shop"
         },
+        _id: String,
         name: String,        
     },    
     sorting: Number,
@@ -16,6 +17,7 @@ var itemSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: "Status"
         },
+        _id: String,
         name: String
     }
 });

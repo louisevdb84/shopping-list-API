@@ -23,8 +23,7 @@ const getItemsByStatus = (req, res) => {
     })
 }
 
-const newItem = (req, res) => {
-    console.log("SOMETHING")
+const newItem = (req, res) => {    
     const { name, shop, sorting, isRepeating, status } = req.body;
     console.log(req.body);
     if (!name) {
@@ -51,30 +50,67 @@ const newItem = (req, res) => {
     });
 }
 
-// const addEditItems = () => {
-//     Shop.findOne({ name: 'Food Lovers Market' }, (err, shop) => {
-//         Status.findOne({ name: 'Permanent' }, (err, status) => {
-//             Item.create({
-//                 name: "Rice",
-//                 shop: shop,
-//                 sorting: 90,
-//                 isRepeating: true,
-//                 status: status
-//             }, (err, item) => {
-//                 if (err) {
-//                     console.log(err);
-//                  } else {
-//                      console.log(item);
-//                  }
-//             })
-//         })
-//     });    
-// }
+const newItems = (req, res) => {    
+    
+    console.log(req.body);
+    // if (!req.body) {
+    //     return res.status(400).json('incorrect form submission');
+    // }
+    Item.collection.insert(req.body, (err, item) => {
+        if (err) {
+            res.json(err);
+        } else {
+            res.json(item);
+        }
+    });
+}
+
+const updateItem = (req, res) => {    
+    console.log(req.params.id);
+    console.log(req.body);
+    Item.findByIdAndUpdate(req.params.id,       
+        req.body,         
+        { new: true },
+        (err, item) => {
+            if (err) {
+                res.json(err);
+            } else {
+                res.json(item);
+            }
+    })
+}
+
+const deleteItem = (req, res) => {    
+    const { id } = req.body;    
+    console.log(id);
+    Item.findByIdAndRemove(id, (err, item) => {
+        if (err) {
+            res.json(err);
+        } else {
+            console.log(item);
+            res.json(item);
+        }
+    })
+}
+const deleteAllItems = (req, res) => {    
+    const { status } = req.body; 
+    Item.deleteMany({'status.name': status}, (err, item) => {
+        if (err) {
+            res.json(err);
+        } else {
+            console.log(item);
+            res.json(item);
+        }
+    })
+}
 
 module.exports = {
-    getItems,
-    //addEditItems,
+    getItems,    
     getItemsByStatus,
-    newItem
+    newItem,
+    newItems,
+    deleteItem,
+    updateItem,
+    deleteAllItems
 }
 

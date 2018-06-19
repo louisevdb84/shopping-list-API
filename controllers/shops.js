@@ -26,6 +26,16 @@ const getShops = (req, res) => {
     })
 }
 
+const getShop = (req, res) => {    
+    Shop.findById(req.params.id, (err, shop) => {
+        if (err) {
+            res.json(err);
+        } else {
+            res.json(shop);
+        }
+    })
+}
+
 const updateShop = (req, res) => {    
     Shop.findByIdAndUpdate(req.params.id,
          // the change to be made. Mongoose will smartly combine your existing 
@@ -55,7 +65,8 @@ const deleteShop = (req, res) => {
 }
 
 module.exports = {
-    getShops,    
+    getShops, 
+    getShop,
     newShop,
     updateShop,
     deleteShop

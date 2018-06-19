@@ -16,8 +16,13 @@ mongoose.connect("mongodb://louise:shoppinglist000@ds119049.mlab.com:19049/shopp
 app.get('/items', (req, res) => { items.getItems(req, res) })
 app.post('/items', (req, res) => { items.getItemsByStatus(req, res) })
 app.post('/items/new', (req, res) => { items.newItem(req, res) })
+app.post('/items/copy', (req, res) => { items.newItems(req, res) })
+app.put('/items/:id/edit', (req, res) => { items.updateItem(req, res) })
+app.delete('/items/delete', (req, res) => { items.deleteItem(req, res) })
+app.delete('/items/deleteAll', (req, res) => { items.deleteAllItems(req, res) })
 
 app.get('/shops', (req, res) => { shops.getShops(req, res) })
+app.get('/:id/shop', (req, res) => { shops.getShop(req, res) })
 app.post('/shops/new', (req, res) => { shops.newShop(req, res) })
 app.put('/shops/:id/edit', (req, res) => { shops.updateShop(req, res) })
 app.delete('/shops/delete', (req, res) => { shops.deleteShop(req, res) })
