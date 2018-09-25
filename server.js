@@ -30,6 +30,6 @@ app.delete('/shops/delete', (req, res) => { shops.deleteShop(req, res) })
 app.get('/status', (req, res) => { status.getStatus(req, res) })
 
 
-app.listen(3050, () => {
-    console.log('app is running on port 3050');
+app.listen(process.env.PORT || 3050, () => {
+    console.log('app is running');
 })
