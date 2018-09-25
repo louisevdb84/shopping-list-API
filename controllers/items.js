@@ -9,7 +9,7 @@ const getItems = (req, res) => {
         } else {
             res.json(item);
         }
-    })
+    }).sort({sorting: 'asc'})
 }
 
 const getItemsByStatus = (req, res) => { 
@@ -20,7 +20,7 @@ const getItemsByStatus = (req, res) => {
         } else {
             res.json(item);            
         }
-    })
+    }).sort({sorting: 'asc'})
 }
 
 const newItem = (req, res) => {    
