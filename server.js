@@ -11,7 +11,7 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-mongoose.connect("mongodb://louise:shoppinglist000@ds119049.mlab.com:19049/shoppinglist");
+mongoose.connect(process.env.shoppingList_MongoDB);
 
 app.get('/items', (req, res) => { items.getItems(req, res) })
 app.post('/items', (req, res) => { items.getItemsByStatus(req, res) })
