@@ -29,7 +29,6 @@ app.delete('/shops/delete', (req, res) => { shops.deleteShop(req, res) })
 
 app.get('/status', (req, res) => { status.getStatus(req, res) })
 
-
 app.listen(process.env.PORT || 3050, () => {
     console.log('app is running');
 })
