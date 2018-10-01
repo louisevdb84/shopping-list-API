@@ -1,5 +1,6 @@
 const User = require('../models/user');
 const bcrypt = require('bcryptjs');
+const localAuth = require('../auth/local');
 
 const newUser = (req, res) => {
     const { username, password } = req.body;
@@ -17,8 +18,9 @@ const newUser = (req, res) => {
         }, (err, user) => {
             if (err) {
                 res.json("Username already exists");
-            } else {
-                res.json(user);
+            } else {                
+                const token = localAuth.encodeToken(user);
+                res.json(token);
             }
         });
 }

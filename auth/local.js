@@ -3,11 +3,11 @@ const jwt = require('jwt-simple');
 //const uuidV4 = require('uuid/v4');
 //uuidV4()
 
-function encodeToken(id) {
+function encodeToken(user) {
   const playload = {
-    exp: moment().add(14, 'days').unix(),
+    exp: moment().add(1, 'days').unix(),
     iat: moment().unix(),
-    sub: id
+    sub: user.id
     };    
   return jwt.encode(playload, process.env.TOKEN_SECRET);
 }

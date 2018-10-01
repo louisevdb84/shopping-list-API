@@ -1,5 +1,6 @@
 const User = require('../models/user');
 const bcrypt = require('bcryptjs');
+const localAuth = require('../auth/local');
 
 const signIn = (req, res) => {    
     const { username, password } = req.body;
@@ -11,8 +12,11 @@ const signIn = (req, res) => {
                 const bool = bcrypt.compareSync(password, user[0].password);
                 if (!bool)
                     res.json("Incorrect password")
-                else 
-                    res.json(user);                
+                else {
+                    const token = localAuth.encodeToken(user[0]);
+                    res.json(token);               
+                }
+                    
             }   
             else {
                 res.json("Incorrect username");
