@@ -7,6 +7,7 @@ const items = require('./controllers/items');
 const shops = require('./controllers/shops');
 const status = require('./controllers/status');
 const register = require('./controllers/register');
+const signin = require('./controllers/signin');
 
 const local = require('./auth/local');
 require('dotenv').config()
@@ -18,6 +19,7 @@ app.use(bodyParser.json());
 mongoose.connect(process.env.shoppingList_MongoDB);
 
 app.post('/register', (req, res) => { register.newUser(req, res) })
+app.post('/signin', (req, res) => { signin.signIn(req, res) })
 
 app.get('/items', (req, res) => { items.getItems(req, res) })
 app.post('/items', (req, res) => { items.getItemsByStatus(req, res) })
@@ -35,9 +37,9 @@ app.delete('/shops/delete', (req, res) => { shops.deleteShop(req, res) })
 
 app.get('/status', (req, res) => { status.getStatus(req, res) })
 
-local.decodeToken(local.encodeToken(5), (err, res) => {
-    console.log(res);
-});
+// local.decodeToken(local.encodeToken(5), (err, res) => {
+//     console.log(res);
+// });
 
 app.listen(process.env.PORT || 3050, () => {
     console.log('app is running');
