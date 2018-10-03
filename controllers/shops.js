@@ -1,29 +1,39 @@
 const Shop = require('../models/shop');
+const local = require('../auth/local');
 
-const newShop = (req, res) => {
-    const { name } = req.body;
+const newShop = (req, res) => {        
+    const { name } = req.body;    
+    
     if (!name) {
         return res.status(400).json('incorrect form submission');
     }
-    Shop.create({
-        name: name
-    }, (err, shop) => {
-        if (err) {
-            res.json(err);
-        } else {
-            res.json(shop);
-        }
-    });
+    local.decodeToken(local.getToken(req.headers), (err, user) => {       
+        Shop.create({
+            name: name,
+            userId:  user.sub            
+        }, (err, shop) => {
+            if (err) {
+                res.json(err);
+            } else {
+                res.json(shop);
+            }
+        });
+    })
 }
 
-const getShops = (req, res) => {
-    Shop.find({}, (err, shops) => {
-        if (err) {
-            res.json(err);
-        } else {
-            res.json(shops);
-        }
+const getShops = (req, res) => {    
+    local.decodeToken(local.getToken(req.headers), (err, user) => {        
+        
+        Shop.find({userId:user.sub}, (err, shops) => {
+            if (err) {
+                res.json(err);
+            } else {                
+                res.json(shops);
+            }
+        })
     })
+    
+    
 }
 
 const getShop = (req, res) => {    

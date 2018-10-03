@@ -24,8 +24,7 @@ const getItemsByStatus = (req, res) => {
 }
 
 const newItem = (req, res) => {    
-    const { name, shop, sorting, isRepeating, status } = req.body;
-    console.log(req.body);
+    const { name, shop, sorting, isRepeating, status } = req.body;    
     if (!name) {
         return res.status(400).json('incorrect form submission');
     }

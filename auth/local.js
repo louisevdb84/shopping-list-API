@@ -20,9 +20,15 @@ function decodeToken(token, callback) {
     // check if the token has expired
     if (now > payload.exp) callback('Token has expired.');
     else callback(null, payload);
-  }
+}
+  
+function getToken(headers) {
+  var header = headers.authorization.split(' ');
+  return(header[1]);
+}
 
 module.exports = {
     encodeToken,
-    decodeToken
+  decodeToken,
+    getToken
 };
