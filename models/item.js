@@ -1,14 +1,7 @@
 var mongoose = require("mongoose");
 
 var itemSchema = new mongoose.Schema({
-    user: {
-        id: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "User"
-        },
-        _id: String,
-        username: String
-    },
+    userId: String,
     name: String, 
     shop: {
         id: {

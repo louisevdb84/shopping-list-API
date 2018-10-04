@@ -37,10 +37,12 @@ const getShops = (req, res) => {
 }
 
 const getShop = (req, res) => {    
+    console.log(req.params.id)
     Shop.findById(req.params.id, (err, shop) => {
         if (err) {
             res.json(err);
         } else {
+            console.log(shop)
             res.json(shop);
         }
     })
