@@ -17,7 +17,7 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-mongoose.connect(process.env.shoppingList_MongoDB);
+//mongoose.connect(process.env.shoppingList_MongoDB);
 
 app.post('/register', (req, res) => { register.newUser(req, res) })
 app.post('/signin', (req, res) => { signin.signIn(req, res) })
