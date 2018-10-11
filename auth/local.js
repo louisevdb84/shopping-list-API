@@ -7,7 +7,7 @@ const jwt = require('jwt-simple');
 function encodeToken(user) {
   console.log(user.id);
   const payload = {
-    exp: moment().add(1, 'days').unix(),
+    exp: moment().add(30, 'days').unix(),
     iat: moment().unix(),
     sub: user.id
     };    
