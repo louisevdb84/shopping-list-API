@@ -4,8 +4,7 @@ const jwt = require('jwt-simple');
 // const uuidV4 = require('uuid/v4');
 // console.log(uuidV4());
 
-function encodeToken(user) {
-  console.log(user.id);
+function encodeToken(user) {  
   const payload = {
     exp: moment().add(30, 'days').unix(),
     iat: moment().unix(),

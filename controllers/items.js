@@ -31,12 +31,16 @@ const getItemsByStatus = (req, res) => {
 }
 
 const getItemByName = (req, res) => { 
-    const { name, status } = req.body;    
+    const { name, status } = req.body; 
+    
     local.decodeToken(local.getToken(req.headers), (err, user) => {                
-            Item.find({userId: user.sub, 'name': name, 'status.name' : status}, (err, item) => {
-            if (err) {
+        console.log(user.sub, status)
+        Item.find({userId: user.sub, 'status.name': status, name: name}, (err, item) => {
+                if (err) {
+                    console.log('error');
                 res.json(err);
             } else {                
+                console.log(item);
                 res.json(item[0]);                
             }
         })
@@ -88,9 +92,7 @@ const newItems = (req, res) => {
     });
 }
 
-const updateItem = (req, res) => {    
-    console.log(req.params.id);
-    console.log(req.body);
+const updateItem = (req, res) => {        
     Item.findByIdAndUpdate(req.params.id,       
         req.body,         
         { new: true },
@@ -104,13 +106,11 @@ const updateItem = (req, res) => {
 }
 
 const deleteItem = (req, res) => {    
-    const { id } = req.body;    
-    console.log(id);
+    const { id } = req.body;        
     Item.findByIdAndRemove(id, (err, item) => {
         if (err) {
             res.json(err);
-        } else {
-            console.log(item);
+        } else {            
             res.json(item);
         }
     })
@@ -120,8 +120,7 @@ const deleteAllItems = (req, res) => {
     Item.deleteMany({'status.name': status}, (err, item) => {
         if (err) {
             res.json(err);
-        } else {
-            console.log(item);
+        } else {            
             res.json(item);
         }
     })

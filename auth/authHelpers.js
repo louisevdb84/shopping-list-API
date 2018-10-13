@@ -46,8 +46,7 @@ function getLoggedInUser(headers, callback) {
       User.find({_id:payload.sub}, (err, user) => {
         if (err) {
             callback(err);
-        } else {            
-          console.log(user);
+        } else {                      
           callback(user);
         }            
       })
