@@ -25,6 +25,7 @@ app.post('/authenticated', (req, res) => { ensureAuthenticated.ensureAuthenticat
 
 app.get('/items', (req, res) => { items.getItems(req, res) })
 app.post('/items', (req, res) => { items.getItemsByStatus(req, res) })
+app.post('/item', (req, res) => { items.getItemByName(req, res) })
 app.post('/items/new', (req, res) => { items.newItem(req, res) })
 app.post('/items/copy', (req, res) => { items.newItems(req, res) })
 app.put('/items/:id/edit', (req, res) => { items.updateItem(req, res) })

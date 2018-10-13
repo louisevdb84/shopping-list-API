@@ -30,6 +30,19 @@ const getItemsByStatus = (req, res) => {
     })
 }
 
+const getItemByName = (req, res) => { 
+    const { name, status } = req.body;    
+    local.decodeToken(local.getToken(req.headers), (err, user) => {                
+            Item.find({userId: user.sub, 'name': name, 'status.name' : status}, (err, item) => {
+            if (err) {
+                res.json(err);
+            } else {                
+                res.json(item[0]);                
+            }
+        })
+    })
+}
+
 const newItem = (req, res) => {      
     const { name, shop, sorting, isRepeating, status } = req.body;    
     if (!name || !shop) {
@@ -121,6 +134,7 @@ module.exports = {
     newItems,
     deleteItem,
     updateItem,
-    deleteAllItems
+    deleteAllItems,
+    getItemByName
 }
 
